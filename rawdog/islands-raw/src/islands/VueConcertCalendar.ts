@@ -1,7 +1,11 @@
+import { createApp } from 'vue'
+//@ts-ignore
+import VueCalendar from './Calendar.vue'
+
 export default function createCalendar() {
     const styles = `
         * {
-            outline: 2px solid red;
+            //outline: 1px solid red;
         }
     `
     const wrapper = document.createDocumentFragment();
@@ -11,7 +15,9 @@ export default function createCalendar() {
     wrapper.appendChild(styleElement);
 
     const calendar = document.createElement('div')
-    calendar.innerHTML = "client side rendered calendar"
+
+    createApp(VueCalendar).mount(calendar)
+
     wrapper.appendChild(calendar);
 
     return wrapper;

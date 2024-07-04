@@ -27,7 +27,8 @@ class Island extends HTMLElement {
 
 
         if (!componentLoader) {
-            throw new Error(`Could not find component for ${src}`);
+            return;
+            //throw new Error(`Could not find component for ${src}`);
         }
         // falls die Komponente client:visible hat, warte bis sie 200px vom viewport entfernt ist und lade sie dann.
 
