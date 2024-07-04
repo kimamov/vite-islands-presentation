@@ -105,6 +105,7 @@ https://dev.to/this-is-learning/islands-server-components-resumability-oh-my-319
 https://jasonformat.com/islands-architecture/
 https://dev.to/this-is-learning/is-0kb-of-javascript-in-your-future-48og
 https://is-land.11ty.dev/
+https://deno.com/blog/intro-to-islands
 
 https://docs.astro.build/en/concepts/why-astro/
 
@@ -128,3 +129,7 @@ The only options available to developers to implement Islands are to use one of 
 Besides Jason’s initial post, there is little discussion available on the idea.
 New frameworks claim to support the Islands architecture making it difficult to filter the ones which will work for you.
 The architecture is not suitable for highly interactive pages like social media apps which would probably require thousands of islands.
+
+
+
+https://js-astro-islands-demo.netlify.app/
