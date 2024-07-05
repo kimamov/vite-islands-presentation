@@ -126,11 +126,11 @@ Vorreiter war hier zB. Apple, die schon lange Preact also Insel für ihre Header
 - Mit isomorphischen rendern (JS Rendering aufn Server und Client) kann man den Workflow stark beschleunigen (1 Codebase für FE und BE mit freiwilligen enhancements auf der Clientseite)
 
 ### Von der Astro Seite
--Performance: Reduces the amount of JavaScript code shipped to the client. The code sent only consists of the script required for interactive components, which is much less than the script needed to recreate the virtual DOM for the entire page and rehydrate all the elements on the page. The smaller size of JavaScript automatically corresponds to faster page loads and Time to Interactive (TTI).
+- Performance: Reduces the amount of JavaScript code shipped to the client. The code sent only consists of the script required for interactive components, which is much less than the script needed to recreate the virtual DOM for the entire page and rehydrate all the elements on the page. The smaller size of JavaScript automatically corresponds to faster page loads and Time to Interactive (TTI).
 Comparisons for Astro with documentation websites created for Next.js and Nuxt.js have shown an 83% reduction in JavaScript code. Other users have also reported performance improvements with Astro.
 
 
--SEO: Since all of the static content is rendered on the server; pages are SEO friendly.
+- SEO: Since all of the static content is rendered on the server; pages are SEO friendly.
 Prioritizes important content: Key content (especially for blogs, news articles, and product pages) is available almost immediately to the user. Secondary functionality for interactivity is usually required after consuming the key content becomes available gradually.
 Accessibility: The use of standard static HTML links to access other pages helps to improve the accessibility of the website.
 Component-based: The architecture offers all advantages of component-based architecture, such as reusability and maintainability.
@@ -144,9 +144,9 @@ Hydrierug außerhalb von JS selber zu implementieren kann Tricky sen.
 - Isomormisches Rendern ist außerhalb von JS möglich aber wahrscheinlich weniger performant
 
 ### Von der Astro Seite
--The architecture is not suitable for highly interactive pages like social media apps which would probably require thousands of islands.
+- The architecture is not suitable for highly interactive pages like social media apps which would probably require thousands of islands.
 
--The only options available to developers to implement Islands are to use one of the few frameworks available or develop the architecture yourself. Migrating existing sites to Astro or Marko would require additional efforts.
+- The only options available to developers to implement Islands are to use one of the few frameworks available or develop the architecture yourself. Migrating existing sites to Astro or Marko would require additional efforts.
 Besides Jason’s initial post, there is little discussion available on the idea.
 New frameworks claim to support the Islands architecture making it difficult to filter the ones which will work for you.
 The architecture is not suitable for highly interactive pages like social media apps which would probably require thousands of islands.
