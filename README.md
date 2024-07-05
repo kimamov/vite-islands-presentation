@@ -147,9 +147,9 @@ NanoJsx https://nanojsx.io/
 
 is-land https://github.com/11ty/is-land
 
+## Stats
+https://lookerstudio.google.com/u/0/reporting/55bc8fad-44c2-4280-aa0b-5f3f0cd3d2be/page/M6ZPC?params=%7B%22df44%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580WordPress%25EE%2580%2580Next.js%25EE%2580%2580Nuxt.js%25EE%2580%2580Gatsby%25EE%2580%2580Astro%25EE%2580%2580SvelteKit%25EE%2580%2580Remix%22,%22df46%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580mobile%22%7D
 
-## Grafiken
-GIF https://res.cloudinary.com/practicaldev/image/fetch/s--sxiQy22K--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_66%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/918jn6corwytcekfhqv6.gif
 
 ## Links
 https://github.com/lxsmnsyc/awesome-islands?tab=readme-ov-file
