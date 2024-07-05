@@ -1,29 +1,46 @@
-# Skygate Islands
+# Skygate Inseln
+![](https://png.pngtree.com/thumb_back/fh260/background/20230609/pngtree-it-is-an-island-on-the-ocean-with-an-island-on-image_2887971.jpg)
 
-### tl;dr: The islands architecture encourages small, focused chunks of interactivity within server-rendered web pages. The output of islands is progressively enhanced HTML, with more specificity around how the enhancement occurs. Rather than a single application being in control of full-page rendering, there are multiple entry points. The script for these “islands” of interactivity can be delivered and hydrated independently, allowing the rest of the page to be just static HTML.
 
-### “tl;dr: Die Architektur der Inseln fördert kleine, fokussierte Interaktionsbereiche innerhalb serverseitig gerenderter Webseiten. Die Ausgabe der Inseln besteht aus schrittweise verbessertem HTML, wobei die Spezifität für die Verbesserung genauer festgelegt ist. Anstatt dass eine einzelne Anwendung die vollständige Seitenrendering-Kontrolle hat, gibt es mehrere Einstiegspunkte. Das Skript für diese Interaktions-“Inseln” kann unabhängig geliefert und hydratisiert werden, sodass der Rest der Seite nur statisches HTML ist.”
+### Die Architektur der Inseln fördert kleine, fokussierte Interaktionsbereiche innerhalb serverseitig gerenderter Webseiten. Die Ausgabe der Inseln besteht aus schrittweise verbessertem HTML, wobei die Spezifität für die Verbesserung genauer festgelegt ist. Anstatt dass eine einzelne Anwendung die vollständige Seitenrendering-Kontrolle hat, gibt es mehrere Einstiegspunkte. Das Skript für diese Interaktions-“Inseln” kann unabhängig geliefert und hydratisiert werden, sodass der Rest der Seite nur statisches HTML ist.”
 
 ## Rendering Patters
-https://www.youtube.com/watch?v=Dkx5ydvtpCA&t=137s
+[![IMAGE ALT TEXT](https://i3.ytimg.com/vi/Dkx5ydvtpCA/maxresdefault.jpg)](https://www.youtube.com/watch?v=Dkx5ydvtpCA&t=137s "Video Title")
+https://www.youtube.com/watch?v=Dkx5ydvtpCA&t
+
 
 - Static Website
 - Multi Page Apps
 - Single page App
 - Server-Side Rendering with Hydration
 - Static Site Generation with Hydration
-- Incremental Static Regeneration
 
+![](https://res.cloudinary.com/practicaldev/image/fetch/s--2-p10SHi--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_800/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ydl3k8yveg99avf1n06j.png)
+### Für uns interessant
+![](https://res.cloudinary.com/practicaldev/image/fetch/s--sxiQy22K--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_66%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/918jn6corwytcekfhqv6.gif)
+- Incremental Static Regeneration
 - Partial Hydration
 - Islands
 
-
+#### Nur teilweise nützlich
 - Streaming SSR
 
 
 https://www.youtube.com/embed/Dkx5ydvtpCA?si=dcYhvWeKR1_57nOi&amp;clip=UgkxT1HFtd0QC2gerOFFK11p0pVRRWBsV9Ru&amp;clipt=EJuuCBjRmQk
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Dkx5ydvtpCA?si=dcYhvWeKR1_57nOi&amp;clip=UgkxT1HFtd0QC2gerOFFK11p0pVRRWBsV9Ru&amp;clipt=EJuuCBjRmQk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
+
+## Incremental Static Regeneration
+JS Runtime baut, sobald sich Daten ändern, die betroffenen statischen Seiten neu. Oftmals direkt aufn Server wo diese deployed werden oder in einem Gitlabtask.
+Dadurch hat man die Vorteile von SSR und statischen Seiten gleichzeitig.
+
+## Partial Hydration und Inseln
+![](https://res.cloudinary.com/ddxwdqwkr/image/upload/f_auto/v1633284886/patterns.dev/theislandsarch--avuxy9rrkk8.png)
+Seiten werden zunächst mit 0kb JS oder nur einem sehr kleinen JS Loader geladen und laden dann, wenn nötig JS Features nach, indem sie die statischen Inhalte mit kleinen Apps austauschen.
+Interaktive Inseln sind eine Vereinfachung dieses Konzepts.
+
+### fixed die Probleme von kompletter Rehydrierung
+![](https://pbs.twimg.com/media/CiB1hhsWEAA0m1L?format=jpg&name=4096x4096)
 
 ## Nutzung
 - Static Site Generators
@@ -38,9 +55,56 @@ https://www.youtube.com/embed/Dkx5ydvtpCA?si=dcYhvWeKR1_57nOi&amp;clip=UgkxT1HFt
 
 
 ## Konzepte
-- Baut stark auf Http2 und Http3 sowie der heutzutage leichten Syntax zum lazy loaden von Modulen
+Baut stark auf Http2 und Http3 sowie der heutzutage leichten Syntax zum lazy loaden von Modulen auf:
 ```js
-    const ricarda=await ()=>import('DieFetteVonDenGruenen.js')
+    const ricardasFrachter=()=>import('DieFetteVonDenGruenen.js');
+    // sobald wir das script brauchen:
+    const ricarda=await ricardasFrachter();
+```
+
+### Minimaler Code um JS als Inseln zu laden
+```ts
+function visible(element: HTMLElement, offsetPx: number = 0) {
+    return new Promise(function (resolve) {
+        const io = new IntersectionObserver(entries => {
+            for (const entry of entries) {
+                if (entry.isIntersecting) {
+                    io.disconnect()
+                    resolve(true)
+                }
+            }
+        }, {
+            rootMargin: `${offsetPx}px`
+        })
+        io.observe(element)
+    })
+}
+
+
+
+class Island extends HTMLElement {
+    async connectedCallback() {
+        const src = this.getAttribute('src') ?? '';
+        const componentLoader = islands[src];
+
+
+        if (!componentLoader) {
+            throw new Error(`Could not find component for ${src}`);
+        }
+        // falls die Komponente client:visible hat, warte bis sie 200px vom viewport entfernt ist und lade sie dann.
+
+        if (this.hasAttribute('client:visible')) {
+            await visible(this, 200)
+        }
+
+        // hydriere die nun aufn client gerenderte Komponente mit den initialen Daten, vom Server.
+        const props = JSON.parse(this.getAttribute('props') ?? '{}');
+        const component = (await componentLoader()).default;
+        this.appendChild(component(props));
+    }
+}
+
+customElements.define('vite-island', Island);
 ```
 
 ## Vorteile
@@ -68,9 +132,6 @@ Vorreiter war hier zB. Apple, die schon lange Preact also Insel für ihre Header
 Hydrierug außerhalb von JS selber zu implementieren kann Tricky sen.
 
 - Isomormisches Rendern ist außerhalb von JS möglich aber wahrscheinlich weniger performant
-
-## Schluss
-- Mit Verständniss über beide Seiten des Renders, wäre beste Leistung möglich.
 
 
 ## Beispiele
