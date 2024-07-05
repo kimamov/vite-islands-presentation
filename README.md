@@ -59,7 +59,10 @@ Baut stark auf Http2 und Http3 sowie der heutzutage leichten Syntax zum lazy loa
     const ricarda=await ricardasFrachter();
 ```
 
+
+
 ### Minimaler Code um JS als Inseln zu laden
+Artikel über eine einfache implementierung: https://betterprogramming.pub/poor-mans-island-architecture-cbcb0ac45092
 ```ts
 function visible(element: HTMLElement, offsetPx: number = 0) {
     return new Promise(function (resolve) {
@@ -167,7 +170,7 @@ https://lookerstudio.google.com/u/0/reporting/55bc8fad-44c2-4280-aa0b-5f3f0cd3d2
 
 ## Links
 https://github.com/lxsmnsyc/awesome-islands?tab=readme-ov-file
-
+https://betterprogramming.pub/poor-mans-island-architecture-cbcb0ac45092
 https://www.patterns.dev/vanilla/islands-architecture/
 https://dev.to/ryansolid/server-rendering-in-javascript-optimizing-performance-1jnk
 https://markojs.com/
