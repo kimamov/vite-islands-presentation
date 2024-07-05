@@ -2,7 +2,7 @@
 ![](https://png.pngtree.com/thumb_back/fh260/background/20230609/pngtree-it-is-an-island-on-the-ocean-with-an-island-on-image_2887971.jpg)
 
 
-### Die Architektur der Inseln fördert kleine, fokussierte Interaktionsbereiche innerhalb serverseitig gerenderter Webseiten. Die Ausgabe der Inseln besteht aus schrittweise verbessertem HTML, wobei die Spezifität für die Verbesserung genauer festgelegt ist. Anstatt dass eine einzelne Anwendung die vollständige Seitenrendering-Kontrolle hat, gibt es mehrere Einstiegspunkte. Das Skript für diese Interaktions-“Inseln” kann unabhängig geliefert und hydratisiert werden, sodass der Rest der Seite nur statisches HTML ist.”
+### tl;dr: The islands architecture encourages small, focused chunks of interactivity within server-rendered web pages. The output of islands is progressively enhanced HTML, with more specificity around how the enhancement occurs. Rather than a single application being in control of full-page rendering, there are multiple entry points. The script for these “islands” of interactivity can be delivered and hydrated independently, allowing the rest of the page to be just static HTML.
 
 ## Rendering Patters
 [![IMAGE ALT TEXT](https://i3.ytimg.com/vi/Dkx5ydvtpCA/maxresdefault.jpg)](https://www.youtube.com/watch?v=Dkx5ydvtpCA&t=137s "Video Title")
@@ -24,9 +24,6 @@ https://www.youtube.com/watch?v=Dkx5ydvtpCA&t
 
 #### Nur teilweise nützlich
 - Streaming SSR
-
-
-https://www.youtube.com/embed/Dkx5ydvtpCA?si=dcYhvWeKR1_57nOi&amp;clip=UgkxT1HFtd0QC2gerOFFK11p0pVRRWBsV9Ru&amp;clipt=EJuuCBjRmQk
 
 
 
@@ -125,6 +122,16 @@ Vorreiter war hier zB. Apple, die schon lange Preact also Insel für ihre Header
 
 - Mit isomorphischen rendern (JS Rendering aufn Server und Client) kann man den Workflow stark beschleunigen (1 Codebase für FE und BE mit freiwilligen enhancements auf der Clientseite)
 
+### Von der Astro Seite
+-Performance: Reduces the amount of JavaScript code shipped to the client. The code sent only consists of the script required for interactive components, which is much less than the script needed to recreate the virtual DOM for the entire page and rehydrate all the elements on the page. The smaller size of JavaScript automatically corresponds to faster page loads and Time to Interactive (TTI).
+Comparisons for Astro with documentation websites created for Next.js and Nuxt.js have shown an 83% reduction in JavaScript code. Other users have also reported performance improvements with Astro.
+
+
+-SEO: Since all of the static content is rendered on the server; pages are SEO friendly.
+Prioritizes important content: Key content (especially for blogs, news articles, and product pages) is available almost immediately to the user. Secondary functionality for interactivity is usually required after consuming the key content becomes available gradually.
+Accessibility: The use of standard static HTML links to access other pages helps to improve the accessibility of the website.
+Component-based: The architecture offers all advantages of component-based architecture, such as reusability and maintainability.
+Despite the advantages, the concept is still in a nascent stage. The limited support results in some disadvantages.
 
 
 ## Nachteile
@@ -133,22 +140,29 @@ Hydrierug außerhalb von JS selber zu implementieren kann Tricky sen.
 
 - Isomormisches Rendern ist außerhalb von JS möglich aber wahrscheinlich weniger performant
 
+### Von der Astro Seite
+-The architecture is not suitable for highly interactive pages like social media apps which would probably require thousands of islands.
+
+-The only options available to developers to implement Islands are to use one of the few frameworks available or develop the architecture yourself. Migrating existing sites to Astro or Marko would require additional efforts.
+Besides Jason’s initial post, there is little discussion available on the idea.
+New frameworks claim to support the Islands architecture making it difficult to filter the ones which will work for you.
+The architecture is not suitable for highly interactive pages like social media apps which would probably require thousands of islands.
 
 ## Beispiele
+Astro (Vorreiter in so ziemlichen allen modernen Browser Features) https://astro.build/
+
 Marko https://markojs.com/
 
-Astro https://astro.build/
-
-https://islandjs.dev/en/
-
 Preact Habitat https://github.com/zouhir/preact-habitat
+
+Islandjs (Standalone implementierung) https://islandjs.dev/en/
 
 NanoJsx https://nanojsx.io/
 
 is-land https://github.com/11ty/is-land
 
 ## Stats
-https://lookerstudio.google.com/u/0/reporting/55bc8fad-44c2-4280-aa0b-5f3f0cd3d2be/page/M6ZPC?params=%7B%22df44%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580WordPress%25EE%2580%2580Next.js%25EE%2580%2580Nuxt.js%25EE%2580%2580Gatsby%25EE%2580%2580Astro%25EE%2580%2580SvelteKit%25EE%2580%2580Remix%22,%22df46%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580mobile%22%7D
+https://lookerstudio.google.com/u/0/reporting/55bc8fad-44c2-4280-aa0b-5f3f0cd3d2be/page/M6ZPC?params=%7B%22df44%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580WordPress%25EE%2580%2580Next.js%25EE%2580%2580TYPO3%2520CMS%25EE%2580%2580Nuxt.js%25EE%2580%2580Gatsby%25EE%2580%2580Astro%25EE%2580%2580SvelteKit%25EE%2580%2580Remix%22,%22df46%22:%22include%25EE%2580%25800%25EE%2580%2580IN%25EE%2580%2580mobile%22%7D
 
 
 ## Links
@@ -172,25 +186,6 @@ https://docs.astro.build/en/concepts/why-astro/
 
 https://dev.to/this-is-learning/islands-server-components-resumability-oh-my-319d
 
-The architecture is not suitable for highly interactive pages like social media apps which would probably require thousands of islands.
-
-Performance: Reduces the amount of JavaScript code shipped to the client. The code sent only consists of the script required for interactive components, which is much less than the script needed to recreate the virtual DOM for the entire page and rehydrate all the elements on the page. The smaller size of JavaScript automatically corresponds to faster page loads and Time to Interactive (TTI).
-Comparisons for Astro with documentation websites created for Next.js and Nuxt.js have shown an 83% reduction in JavaScript code. Other users have also reported performance improvements with Astro.
-
-
-Image Courtesy: https://divriots.com/blog/our-experience-with-astro/
-
-SEO: Since all of the static content is rendered on the server; pages are SEO friendly.
-Prioritizes important content: Key content (especially for blogs, news articles, and product pages) is available almost immediately to the user. Secondary functionality for interactivity is usually required after consuming the key content becomes available gradually.
-Accessibility: The use of standard static HTML links to access other pages helps to improve the accessibility of the website.
-Component-based: The architecture offers all advantages of component-based architecture, such as reusability and maintainability.
-Despite the advantages, the concept is still in a nascent stage. The limited support results in some disadvantages.
-
-The only options available to developers to implement Islands are to use one of the few frameworks available or develop the architecture yourself. Migrating existing sites to Astro or Marko would require additional efforts.
-Besides Jason’s initial post, there is little discussion available on the idea.
-New frameworks claim to support the Islands architecture making it difficult to filter the ones which will work for you.
-The architecture is not suitable for highly interactive pages like social media apps which would probably require thousands of islands.
 
 
 
-https://js-astro-islands-demo.netlify.app/
